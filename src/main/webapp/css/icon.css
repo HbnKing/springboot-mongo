@@ -1,0 +1,20 @@
+/* 
+ * @huifu  shanghai 17/10/26  
+ */
+ 
+/*
+ *  check 
+ */ 
+.icon-check{
+  color:#000;
+  position:relative;
+  margin-left:2px;
+  margin-bottom:2px;
+  width:8px;
+  height:4px;
+  border-bottom:solid 2.5px currentColor;
+  border-left:solid 2.5px currentColor;
+  -webkit-transform:rotate(-45deg);
+  transform:rotate(-45deg);
+  display:inline-block;
+}

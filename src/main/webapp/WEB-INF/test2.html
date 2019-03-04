@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+
+        #ta tr{
+            height: 34px;
+
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+        function delRow(a) {
+            //获取table对象
+            var ta=document.getElementById("ta");
+            //获取删除行的对象
+
+            var tr=a.parentNode.parentNode;
+            //删除行
+            ta.deleteRow(tr.rowIndex);
+
+        }
+
+        // function updataRow(){
+        //  var cell=document.getElementById("cell");
+        //  var cell=tr.cell[3];
+
+        //  if(!isNaN(cell.innerHTML))
+        //  cell.innerHTML="<input type='text' value='"+cell.innerHTML+"'onblur='updataRow2(this)'/>";
+        // }
+
+        // function updataRow2(inp){
+        //  // var cell=document.getElementById("cell");
+        //  var cell=inp.parentNode;
+        //  cell.innerHTML=inp.value;
+        // }
+    </script>
+
+</head>
+<body>
+
+<table border="1px" id="ta">
+    <tr  style="text-align: center;font-weight: bold;">
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>操作</td>
+    </tr>
+
+    <tr>
+        <td>1</td>
+        <td>11</td>
+        <td>111</td>
+
+        <td id="cell">1111</td>
+        <td align="center">
+            <input type="button" name="" id="" value="修改" onclick="updataRow(this)" />
+            <input type="button" name="" id="" value="删除" onclick="delRow(this)" />
+        </td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <td>11</td>
+        <td>111</td>
+        <td>1111</td>
+        <td align="center">
+            <input type="button" name="" id="" value="修改" onclick="updataRow(this)" />
+            <input type="button" name="" id="" value="删除" onclick="delRow(this)"/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>3</td>
+        <td>11</td>
+        <td>111</td>
+        <td>1111</td>
+        <td align="center">
+            <input type="button" name="" id="" value="修改" onclick="updataRow(this)" />
+            <input type="button" name="" id="" value="删除" onclick="delRow(this)"/>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
