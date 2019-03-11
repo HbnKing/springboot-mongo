@@ -66,14 +66,7 @@ public class Instantiation implements CommandLineRunner {
 
 		//-----插入一定的数据
 
-		String[] data = new String[]{"2","4"};
-		Job j1 = new Job(null ,Arrays.asList(data));
-		data[0]= "3";
 
-		Job j2 = new Job(null ,Arrays.asList(data));
-
-		jobRepository.save(j1);
-		jobRepository.save(j2);
 
 
 

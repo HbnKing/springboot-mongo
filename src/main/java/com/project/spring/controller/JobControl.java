@@ -1,5 +1,7 @@
 package com.project.spring.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.project.spring.domain.Job;
 import com.project.spring.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class JobControl {
     public ResponseEntity<Void> insertJob(
             @RequestParam(value = "id",required = false) String id,
             @RequestParam(value = "jobId",required = true,defaultValue = "job1")String jobId,
-            @RequestParam( value ="identity[]",required = false) List<String> identity) {
+            @RequestParam( value ="identity",required = false) Map<String,Object> identity) {
         System.out.println("id is " +id);
         System.out.println("identity is " +identity);
         Job  job  = new Job(id,jobId,identity);
@@ -121,12 +123,49 @@ public class JobControl {
             byJobId = new Job();
         }
         byJobId.setJobId(jobId);
-        byJobId.setIdentity(identity);
+        //byJobId.setIdentity(identity);
 
         service.update(byJobId);
         return ResponseEntity.noContent().build();
     }
 
+
+
+
+    /**
+     * 根据id 更新
+     * 传入 数组对象
+     * @param
+     * @return
+     *
+     */
+    @RequestMapping(value="/updateMapIds")
+    public ResponseEntity<Void> updateMapIds(
+            @RequestParam(value = "jobId")String jobId,
+            @RequestParam( value ="identity") String identity) {
+
+        //System.out.println("id is " +id);
+
+        System.out.println(jobId);
+        System.out.println(identity);
+
+
+
+
+        JSONObject  jsonObject = JSONObject.parseObject(identity);
+        Map<String, Object> innerMap = jsonObject.getInnerMap();
+
+
+        Job byJobId = service.findByJobId(jobId);
+        if(byJobId == null){
+            byJobId = new Job();
+        }
+        byJobId.setJobId(jobId);
+        byJobId.setIdentity(innerMap);
+
+        service.update(byJobId);
+        return ResponseEntity.noContent().build();
+    }
 
 
     @RequestMapping(value="/findjob")

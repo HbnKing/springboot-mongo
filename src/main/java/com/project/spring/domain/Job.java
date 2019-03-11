@@ -21,11 +21,11 @@ public class Job {
 
     private static final long serialVersionUID = 1L;
 
-    public List<String> getIdentity() {
+    public Map<String,Object>  getIdentity() {
         return identity;
     }
 
-    public void setIdentity(List<String> identity) {
+    public void setIdentity(Map<String,Object> identity) {
         this.identity = identity;
     }
 
@@ -45,7 +45,7 @@ public class Job {
     }
 
     private String jobId;
-    private List<String> identity = new ArrayList<>();
+    private Map<String,Object> identity = new HashMap<>();
 
     private List<String> comments = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class Job {
     }
 
 
-    public Job(String  id ,String jobId,List<String> identity){
+    public Job(String  id ,String jobId,Map<String,Object>  identity){
         this.id = id ;
         this.jobId = jobId ;
         this.identity = identity;
@@ -67,7 +67,7 @@ public class Job {
      * @param id
      * @param identity
      */
-    public Job(String id, List<String> identity){
+    public Job(String id, Map<String,Object> identity){
         this.id = id ;
         this.identity = identity ;
     }
@@ -86,7 +86,7 @@ public class Job {
         Map<String,Object>  map = new LinkedHashMap<>();
         map.put("id",id);
         map.put("jobId",jobId);
-        map.put("identity",identity);
+        map.put("identity",identity.toString());
 
         return map;
     }

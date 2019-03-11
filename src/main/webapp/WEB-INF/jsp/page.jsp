@@ -286,6 +286,8 @@
             var jobId = $("#jobIdinput").val();
             console.info("jobid is "+jobId);
 
+
+            var  mapId = new Map() ;
             for(var i=0;i<len;i++){
                 var f=$(".itemdiv").eq(i).children().eq(1).children().eq(1).children().eq(0).children().eq(0).val();
                 var o=$(".itemdiv").eq(i).children().eq(2).children().eq(1).children().eq(0).children().eq(0).val();
@@ -307,8 +309,11 @@
                 console.info("fv is" +fv);
                 console.info("ov is" +ov);
 
+                console.info("try to  add  to map")
+                mapId.set(v,o);
+
                 if(i==0){
-                    condition_expert=f+o+v;
+                    condition_expert= f+o+v;
                     condition_onenet='{'+fv+'}'+ov+v;
                 }else{
                     condition_expert=condition_expert+'并且'+f+o+v;
@@ -322,9 +327,35 @@
             console.log(condition_onenet);
 
 
+            console.log("log  map ");
+            //console.log(mapId.get("aaa"))
+            //遍历
+            mapId.forEach(function(value, key) {
+                console.log(key + ' = ' + value);
+            });
+
+
+
 
             var json="";
 
+
+            //----
+
+
+       /*   var json='{"name": "lily","age":"15"}';
+
+             var map={name: "lily", age:"15"};
+			var name=map["name"];
+            var name=map.name;
+
+			var json2map=JSON.parse(json);
+
+            var map2json=JSON.stringify(map);
+            console.log("ceshi" +map2json);
+            console.log("ceshimap" +MapTOJson(mapId));
+			console.log("ceshi" +json2map);
+*/
 
             //新增 和修改
 			if(jobId==null || jobId == ""){
@@ -346,7 +377,8 @@
 
             }else {
 			    console.info("更新")
-			    json = dataUpdate(jobId,ids);
+			    json = dataMapIds(jobId,MapTOJson(mapId));
+			    console.log(json)
 			    $('#addf')[0].reset();
                 table.reload("the_table");
 
@@ -475,7 +507,9 @@
     	   
            widthList[i] = 200;
         }
-       
+
+
+
        
 
         var json = "";
@@ -510,6 +544,43 @@
                 return json;
             }
 
+
+    function MapTOJson(m) {
+        var str = '{';
+        var i = 1;
+        m.forEach(function (item, key, mapObj) {
+            if(mapObj.size == i){
+                str += '"'+ key+'":"'+ item + '"';
+            }else{
+                str += '"'+ key+'":"'+ item + '",';
+            }
+            i++;
+        });
+        str +='}';
+        //console.log(str);
+        return str;
+    }
+
+    function dataMapIds(jobId,mapId){
+
+		console.log("map is "+mapId);
+
+        var json="";
+        $.ajax({
+            url:reportUrl + '/job/updateMapIds',
+            data:{
+                "jobId":jobId,
+                "identity":mapId
+            },
+            async: false,
+            dataType:"json",
+            success:function(data){
+                json=data;
+            }
+        });
+        return json;
+
+    }
 
     //通过点击事件，获取指定id数据集  根据 _id  去查找
     function datas(reportId){
