@@ -218,7 +218,7 @@
 
         table.render({
             elem: '#tabledata', //指定原始表格元素选择器（推荐id选择器）
-            url:"http://localhost:9010/job/findall",
+            url:"/job/findall",
             page:true,
             limits: [10,20,30],
             limit: 10,
@@ -243,7 +243,7 @@
                 layer.confirm('确认删除么', function (index) {
                     $.ajax({
                         type: "post",
-                        url: 'http://localhost:9010/itemdel?id=' + data.id,
+                        url: '/itemdel?id=' + data.id,
                         data: {
                             id: data.id
                         },
@@ -362,7 +362,7 @@
 
 			console.info("插入");
             $.ajax({
-                url: reportUrl + '/job/insert',
+                url: '/job/insert',
                 type : 'POST',
                 data : {
                     "identity":ids,
@@ -405,7 +405,7 @@
 				'	<option value=">">高</option>\n' +
 				'	<option value="=">等</option>\n' +
 				'	<option value="=">小</option>\n' +*/
-                
+
                 /*  '                     <option value="" selected="selected">字段类型</option>\n' +
 				'				<option value="String">String</option>\n' +
 				'				<option value="Double">Double</option>\n' +
@@ -438,27 +438,27 @@
                 '                    <input class="layui-input f_val" lay-verify="required" name="f_val" placeholder="请输入因素数值" autocomplete="off"/>\n' +
                 '                </div>\n' +
                 '            </div>';
-                
+
             $("#formpart").after($(addform));
 
 			form.render();
-        }); 
-        
-        
-        
-        
-    $("#rabkool").click(function () {
-     
-        
-        	console.info("deldeeee")
-        	
-                     $("#rab").remove()
-                   
-                     form.render();
-             }); 
-        
+        });
 
-        
+
+
+
+    $("#rabkool").click(function () {
+
+
+        	console.info("deldeeee")
+
+                     $("#rab").remove()
+
+                     form.render();
+             });
+
+
+
 
         var $ = layui.$, active = {
             reload : function() {
@@ -473,7 +473,7 @@
                     where : {
                         name : demoReload.val()
                     }
-                });	
+                });
             }
         };
 
@@ -491,7 +491,7 @@
 	var nameList = ['日期', '日出时刻', '最高温', '最低温', '日落时间', '空气指数', '风向', '风力', '天气', '提示'] //table的列名
 	var widthList = [100, 100, 100, 100, 100, 100, 100, 100, 100, 250] //table每列的宽度
 
-	var reportUrl = "http://localhost:9010";
+	var reportUrl = "http://localhost:8080";
 
 
       //根据id获取到表的字段，然后按照逗号分隔开。
@@ -504,13 +504,13 @@
        var nameList = cc.split(",");//table的列名
        var widthList=new Array(nameList.length);//列宽
        for(i in widthList){
-    	   
+
            widthList[i] = 200;
         }
 
 
 
-       
+
 
         var json = "";
         //初始化table列名
@@ -533,7 +533,7 @@
             function datasbak(reportId,whereFields){
                 var json="";
                 $.ajax({
-                    url:reportUrl + '/base/select',
+                    url:'/base/select',
                     data:{"id":reportId,"whereFields":whereFields},
                     async: false,
                     dataType:"json",
@@ -567,7 +567,7 @@
 
         var json="";
         $.ajax({
-            url:reportUrl + '/job/updateMapIds',
+            url:'/job/updateMapIds',
             data:{
                 "jobId":jobId,
                 "identity":mapId
@@ -586,7 +586,7 @@
     function datas(reportId){
         var json="";
         $.ajax({
-            url:reportUrl + '/job/find',
+            url: '/job/find',
             data:{"id":reportId},
             async: false,
             dataType:"json",
@@ -599,7 +599,7 @@
     function datawithjobId(reportId){
         var json="";
         $.ajax({
-            url:reportUrl + '/job/findjob',
+            url:'/job/findjob',
             data:{"jobId":reportId},
             async: false,
             dataType:"json",
@@ -616,7 +616,7 @@
     function dataUpdate(jobId,ids){
         var json="";
         $.ajax({
-            url:reportUrl + '/job/update',
+            url:'/job/update',
             data:{
                 "jobId":jobId,
 				"identity":ids
@@ -634,7 +634,7 @@
     function datasall(){
         var json="";
         $.ajax({
-            url:reportUrl + '/job/findall',
+            url:'/job/findall',
             //data:{"id":reportId},
             async: false,
             dataType:"json",
@@ -650,7 +650,7 @@
     function deleteById(fieldID){
         var json="";
         $.ajax({
-            url:reportUrl + '/job/delete',
+            url:'/job/delete',
             data:{"id":fieldID},
             async: false,
             dataType:"json",
@@ -660,9 +660,9 @@
         });
         return json;
     }
-    
-    
-    
+
+
+
 
     function delRow(a) {
         console.info(a)
@@ -683,15 +683,15 @@
         deleteById(fieldID)
 		delRow(table)
     }
-	
+
     function startUp(fieldID,table) {
         alert('>>>>>启动');
         console.info("table")
-       
-    
+
+
         var json="";
         $.ajax({
-            url:reportUrl + '/job/start',
+            url:'/job/start',
             data:{"id":fieldID},
             async: false,
             dataType:"json",

@@ -17,8 +17,8 @@ import static com.project.spring.util.ControllerConstants.*;
 @RequestMapping("/base")
 public class BaseController {
 
-    @RequestMapping("/page")
-    public String page1(){
+    @RequestMapping("/pages")
+    public String page(){
         return "page";
     }
 

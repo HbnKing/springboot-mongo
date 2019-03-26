@@ -75,7 +75,7 @@ public class JobControl {
         for(Job  job :all){
             list.add(job.JobtoMap());
         }
-        System.out.println(list);
+        //System.out.println(list);
         return ResponseEntity.ok().body(list);
     }
 
@@ -95,6 +95,9 @@ public class JobControl {
     @RequestMapping(value="/start", method= RequestMethod.GET)
     public ResponseEntity<Void> startUp(@RequestParam( value ="id",defaultValue = "")String id) {
         System.out.println("此处 调用的是 shell 脚本 启动 spark  任务   传入的  参数为 " +id);
+
+        service.runSparkShell(id);
+
      
         
         return ResponseEntity.noContent().build();

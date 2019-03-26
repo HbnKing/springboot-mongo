@@ -295,7 +295,7 @@
 		</div>
 	</div>
 	<script>
-	var reportUrl = "http://localhost:8080/com.report";
+	var reportUrl = "http://localhost:8080/";
 	
 	<!-- 获取固定格式时间 -->
 	Date.prototype.toDateLocaleString = function (){
@@ -309,7 +309,7 @@
 
 	function insertRuleResult(fieldId, fact, runResult, factWhere){
 		$.ajax({
-			url: reportUrl + '/ruleRunResult/insert',
+			url:  '/ruleRunResult/insert',
 			method:'POST',
 			data:{
 				fieldCheckConfId:fieldId,
@@ -370,7 +370,7 @@
 		}
 		console.log(Sql);
 		$.ajax({
-			url: reportUrl + '/fieldconf/select/sql',
+			url:  '/fieldconf/select/sql',
 			method:'POST',
 			data:{
 				sql: Sql,
@@ -632,7 +632,7 @@
 		
 		
 		$.ajax({
-			url: reportUrl + '/ruleconf/select',
+			url:  '/ruleconf/select',
 			method:'POST',
 			dataType:'json',
 			success: function (data){
@@ -670,7 +670,7 @@
     $("#clickbutton").click(function (){
 			
 			$.ajax({
-				url: reportUrl + '/fieldconf/select',
+				url:  '/fieldconf/select',
 				method:'POST',
 				dataType:'json',
 				data:{
@@ -713,7 +713,7 @@
 		//-------------最终的运算结果表展示。----------------
 		 $("#resultbutton").click(function (){
 			 $.ajax({
-					url: reportUrl + '/ruleRunResult/select',
+					url:  '/ruleRunResult/select',
 					method:'POST',
 					dataType:'json',
 					data:{
@@ -774,7 +774,7 @@
 			var expression = $("#ruleExpression").val();
 			var ruleWhere = $("#ruleWhere").val();
 			$.ajax({
-				url: reportUrl + '/ruleconf/insert',
+				url:  '/ruleconf/insert',
 				method:'POST',
 				data:{
 					ruleName:ruleName,
@@ -854,7 +854,7 @@
 				}
 			console.log(data);
 			$.ajax({
-				url: reportUrl + '/fieldconf/insert',
+				url:  '/fieldconf/insert',
 				method:'POST',
 				data:data,
 				dataType:'json',
@@ -893,7 +893,7 @@
 
 		function reloadResult(){
 			$.ajax({
-				url: reportUrl + '/fieldconf/select/all',
+				url:  '/fieldconf/select/all',
 				method:'POST',
 				dataType:'json',
 				success: function (data){

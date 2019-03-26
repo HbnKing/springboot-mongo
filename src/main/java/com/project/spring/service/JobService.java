@@ -6,6 +6,8 @@ import com.project.spring.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,6 +70,24 @@ public class JobService {
     private void updateData(Job oldObj, Job obj) {
 
         oldObj.setIdentity(obj.getIdentity());
+    }
+
+    public void runSparkShell(String id) {
+
+        try {
+            String shpath="/home/spark-job.sh  " +id  ;
+            Process ps = Runtime.getRuntime().exec(shpath);
+            ps.waitFor();
+            BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                System.out.println("\n");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
    /* public Job fromDTO(JobDTO objDto) {
