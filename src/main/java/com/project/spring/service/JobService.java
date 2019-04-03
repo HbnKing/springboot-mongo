@@ -76,15 +76,16 @@ public class JobService {
 
         try {
             String[] shpath={"sh","-c","/home/spark-job.sh  " +id } ;
+            System.out.println("try to  run spark shell  ,id is " +id );
             Process ps = Runtime.getRuntime().exec(shpath);
             ps.waitFor();
 
-            /*BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));
             String line;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
-                System.out.println("\n");
-            }*/
+                //System.out.println("\n");
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
